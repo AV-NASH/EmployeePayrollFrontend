@@ -1,0 +1,99 @@
+
+<mat-toolbar>
+   <div>
+       <div class="employeetxt">EMPLOYEE</div>
+       <div class="payrolltxt">PAYROLL</div>
+   </div>
+  </mat-toolbar>
+
+  <div  fxLayout="row" fxLayoutAlign="center center" >
+  <mat-card>
+    <div fxLayout="column">
+    <div class="formHeader">Employee Payroll Form</div>
+
+    <div [formGroup]="userDetail" fxLayout="row" fxLayoutAlign="start center" >
+    <div fxFlex="20"  style=" font-size: 20px; text-align: left; padding-bottom: 23px;">Name </div>
+    <mat-form-field appearance="outline" fxFlex = "80">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name"  placeholder="Name">
+      </mat-form-field>
+    </div>
+
+    <div [formGroup]="userDetail" fxLayout="row" fxLayoutAlign="start center" >
+        <div fxFlex="20" style=" font-size: 20px; text-align: left; padding-bottom: 23px;">Gender </div>
+        <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxFlex="80" formControlName="gender"   aria-label="Select an option">
+          <mat-radio-button style="font-size: 49%" value="male">Male</mat-radio-button>
+          <mat-radio-button style="font-size: 49%" value="female">Female</mat-radio-button>
+          </mat-radio-group>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" >
+        <div fxFlex="20" style=" font-size: 20px; text-align: left; padding-bottom: 23px;">Deartment </div>
+        <div *ngFor = "let department of department" fxLayout="row" fxLayoutAlign="space-between center" style="width: 140px;padding-top: 2%;" fxFlex="80">
+          <mat-checkbox style="font-size: 49%" #checkBox [value]= "department" (change)="getCheckbox(checkBox)" >{{department}}</mat-checkbox>
+    </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" >
+      <div fxFlex="20" style=" font-size: 20px; text-align: left; padding-bottom: 23px;">Salary </div>
+      <mat-slider  thumbLabel
+      [displayWith]="formatLabel" (input)="getPrecio($event)"
+   min="0" max="1500000" step="1" value="{{precio}}" fxFlex="60"></mat-slider>
+    </div>
+  
+
+    <div  fxLayout="row" fxLayoutAlign="start start">
+      <div fxFlex="20" style=" font-size: 20px; text-align: left; padding-bottom: 23px;">Start Date </div>
+      <div [formGroup]="userDetail" fxFlex="70" fxLayout="row" fxLayoutAlign="space-between center" >
+        <mat-form-field class="field" fxFlex='50' appearance="outline">
+          <mat-label>Day</mat-label>
+          <select matNativeControl required formControlName="day">
+              <option *ngFor="let day of Day " [value]="day">
+                  {{day}}
+                </option>
+          </select>
+
+        </mat-form-field>
+
+        <mat-form-field class="field" fxFlex='50' appearance="outline" style="margin-left: 7%;">
+          <mat-label> Month</mat-label>
+          <select matNativeControl required formControlName="month">
+              <option *ngFor="let month of Month " [value]="month">
+                  {{month}}
+                </option>
+          </select>
+
+        </mat-form-field>
+        <mat-form-field class="field" fxFlex='50' appearance="outline" style="margin-left: 7%;">
+          <mat-label> Year</mat-label>
+          <select matNativeControl required formControlName="year">
+              <option *ngFor="let year of Year " [value]="year">
+                  {{year}}
+                </option>
+          </select>
+
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <div fxFlex="20" style=" font-size: 20px; text-align: left; padding-bottom: 23px;">Notes </div>
+      <mat-form-field class="field" fxFlex="80" appearance="outline">
+        <mat-label>Notes</mat-label>
+        <input matInput class="matInput" autocomplete="off" placeholder="Notes">
+
+      </mat-form-field>
+    </div>
+
+    <div class="button" fxLayout='row' fxLayoutAlign='end center'> 
+      <button class = "register" mat-raised-button color="primary"(click)="register()">Submit</button>
+      <button class = "register" mat-raised-button color="primary">Reset</button>
+
+
+      </div>
+    </div>
+</mat-card>
+ 
+  </div>
+
+  
