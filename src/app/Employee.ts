@@ -5,5 +5,7 @@ export class Employee {
     gender:any;
     department:any;
     startDate:any;
+    notes:any;
+    profilepic:any;
     
 }

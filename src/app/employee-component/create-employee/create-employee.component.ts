@@ -5,6 +5,7 @@ import { UserserviceService } from '../../Services/userervice/userservice.servic
 import { Employee } from "../../Employee";
 import { QueryList } from '@angular/core';
 import { ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class CreateEmployeeComponent implements OnInit {
   
 
   constructor(private employeeService: UserserviceService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder, private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.userDetail = this.formBuilder.group({
@@ -34,7 +36,9 @@ export class CreateEmployeeComponent implements OnInit {
       gender: [null, Validators.required],
       day: [null, Validators.required],
       year: [null, Validators.required],
-      month: [null, Validators.required]
+      month: [null, Validators.required],
+      notes:[null,Validators.required],
+      profilepic:[null,Validators.required]
 
     });
 
@@ -102,19 +106,25 @@ export class CreateEmployeeComponent implements OnInit {
     var employeeDto = {
       'name': this.userDetail.controls['name'].value,
       'salary': this.precio,
-      'department':this.checked.toString(),
+      'department':this.checked,
       'gender': this.userDetail.controls['gender'].value,
-      'startDate': this.userDetail.controls['day'].value + " " + this.userDetail.controls['month'].value + " " + this.userDetail.controls['year'].value
-    };
+      'startDate': this.userDetail.controls['day'].value + " " + this.userDetail.controls['month'].value + " " + this.userDetail.controls['year'].value,
+      'notes':this.userDetail.controls['notes'].value,
+      'profilepic':this.userDetail.controls['profilepic'].value
+    };           
     console.log("employee dto is", employeeDto)
     this.employeeService.createEmployee(employeeDto).subscribe((response: any) => {
-      console.log("response is " + response);
+      this.router.navigate(["/"]);
+      console.log("response",response.object)
     })
   }
 
   onSubmit() {
     this.submitted = true;
     this.register();
+  }
+  reset(){
+    this.userDetail.reset();
   }
 
 }

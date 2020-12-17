@@ -1,0 +1,51 @@
+<mat-toolbar>
+    <div>
+        <div class="employeetxt">EMPLOYEE</div>
+        <div class="payrolltxt">PAYROLL</div>
+    </div>
+   </mat-toolbar>
+ 
+   <div  fxLayout="row" fxLayoutAlign="center center" >
+   <mat-card>
+    <div fxLayout='row' fxLayoutAlign="space-between center" style="color: black;
+    margin-top: 8%;">
+      <div style="font-weight: 800;
+      font-size: 258%;">Employee Details</div>
+      <div>
+        <button class="register" mat-raised-button color="primary" routerLink="/create-employee">Add Employee</button>
+      </div>
+    </div>
+
+    <!-- <div class="panel panel-default"> -->
+        <!-- [style.background-color]="changeColorOne() -->
+
+        <div class="tableWrapper">
+          <div fxLayout="row" fxLayoutAlign="space-between center"  class="containerTitle">
+            <div fxFlex="5" class="oneTitle">Profile</div>
+            <div fxFlex="15" class="oneTitle">Name</div>
+            <div fxFlex="10" class="oneTitle">Salary</div>
+            <div fxFlex="20" class="oneTitle">Department</div>
+            <div fxFlex="10" class="oneTitle">Gender</div>
+            <div fxFlex="10" class="oneTitle">Start Date</div>
+            <div fxFlex="20" class="oneTitle">Notes</div>
+            <div fxFlex="10" class="oneTitle">Actions</div>
+          </div>
+    
+          <div fxLayout="row" fxLayoutAlign="space-between center"  class="containerListItems" *ngFor="let employee of employees;" >
+            <div fxFlex="5" class="one"><img src="{{employee.profilepic}}" alt=""></div>
+            <div fxFlex="15" class="two">{{employee.name}}</div>
+            <div fxFlex="10" class="two">{{employee.salary}}</div>
+            <div fxFlex="20" class="two">{{employee.department}}</div>
+            <div fxFlex="10" class="two">{{employee.gender}}</div>
+            <div fxFlex="10" class="two">{{employee.startDate}}</div>
+            <div fxFlex="20" class="two">{{employee.notes}}</div>
+    
+    
+            <div fxFlex="10" class="three">
+              <button mat-raised-button [routerLink]="['/create', employee.id]">E</button>
+              <button mat-raised-button (click)="deleteEmployee(employee.id)">X</button>
+            </div>
+          </div>
+        </div>
+   </mat-card>
+   </div>

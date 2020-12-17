@@ -14,4 +14,11 @@ export class UserserviceService {
     return this.http.post('http://localhost:9090/employee-payroll/create/',data);
 
   }
+
+   getEmployeesList(){
+    console.log("in service")
+    return this.http.get('http://localhost:9090/employee-payroll/get');
+  }
+
 }
+
