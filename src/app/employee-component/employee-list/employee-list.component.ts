@@ -19,6 +19,16 @@ export class EmployeeListComponent implements OnInit {
     this.reloadData();
   }
 
+  deleteEmployee(id) {
+    console.log(id)
+     this.employeeService.deleteEmployee(id)
+       .subscribe((response:any) => {
+         console.log(response)
+         this.reloadData();
+        // this.router.navigate(["/"]);
+       })
+  }
+
   reloadData() {
     this.employeeService.getEmployeesList().subscribe((response:Response)=>{
       console.log("Response is ====> ",response)

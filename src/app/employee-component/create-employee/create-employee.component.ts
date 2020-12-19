@@ -16,11 +16,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CreateEmployeeComponent implements OnInit {
 
   @ViewChildren ('checkBox') checkBox:QueryList<any>;
+  id: any;
+  a: boolean = false;
   employee: Employee = new Employee();
   submitted = false;
   userDetail: FormGroup;
   checked = [];
   precio = 0;
+  isEdit: Boolean;
+  isDisabled:Boolean;
+  departments: string[] =[]
   department =['Hr','Sales', 'Finance', 'Engineer','Other'];
   
 
@@ -31,7 +36,7 @@ export class CreateEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.userDetail = this.formBuilder.group({
       name: [null, Validators.compose([Validators.required, Validators.minLength(2),
-      Validators.pattern('[a-zA-Z ]$')])],
+      Validators.pattern('(^[A-Z])([a-zA-Z]){2,}')])],
       salary: [null, Validators.required],
       gender: [null, Validators.required],
       day: [null, Validators.required],
@@ -42,12 +47,41 @@ export class CreateEmployeeComponent implements OnInit {
 
     });
 
-  }
+    this.route.params.subscribe(param => {
+      console.log(param)
+      if (param && param.id) {
+        console.log("inside if")
+        this.employeeService.getEmployee(param.id).subscribe((response: any) => {
+          console.log(response)
+          this.id = param.id;
+          this.isEdit = true;
+          this.userDetail.controls["name"].setValue(response.name)
+           this.userDetail.controls["salary"].setValue(response.salary)
+           this.userDetail.controls["gender"].setValue(response.gender)
+           var str = response.startDate;
+           var splited: [0, 1, 2] = str.split(" ");
+          // console.log("splitted is", splited)
+           this.departments = response.department;         
+             this.userDetail.controls["day"].setValue(splited[0])
+          this.userDetail.controls["month"].setValue(splited[1])
+          this.userDetail.controls["year"].setValue(splited[2])
+          this.userDetail.controls["notes"].setValue(response.notes)
+          this.userDetail.controls["profilepic"].setValue(response.profilepic)
 
-  getCheckbox(checkbox){
+        })
+      }
+    })
+
+  } 
+
+  getCheckbox(){
     this.checked = [];
     const checked = this.checkBox.filter(checkbox => checkbox.checked);
-    checked.forEach(data => this.checked.push(data.value))
+    checked.forEach(data => {
+      console.log(data.value)
+      var a=data.value;
+      this.checked.push(a)
+    })
   }
 
   getPrecio(event) {
@@ -73,6 +107,32 @@ export class CreateEmployeeComponent implements OnInit {
     '3',
     '4',
     '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
   ];
 
   Month = [
@@ -81,6 +141,13 @@ export class CreateEmployeeComponent implements OnInit {
     'March',
     'April',
     'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov.',
+    'Dec',
   ];
 
   Year = [
@@ -101,7 +168,7 @@ export class CreateEmployeeComponent implements OnInit {
 
   register() {
     console.log(this.checked)
-    var x = this.checked.toString();
+    var x = this.checked
     console.log(x)
     var employeeDto = {
       'name': this.userDetail.controls['name'].value,
@@ -119,6 +186,31 @@ export class CreateEmployeeComponent implements OnInit {
     })
   }
 
+  update() {
+    this.getCheckbox();
+    console.log(this.checked)
+    var x = this.checked
+    console.log(x)
+    var employeeDto = {
+      'name': this.userDetail.controls['name'].value,
+      'salary': this.userDetail.controls['salary'].value,
+      'department': this.checked,
+      'gender': this.userDetail.controls['gender'].value,
+      'startDate': this.userDetail.controls['day'].value + " " + this.userDetail.controls['month'].value + " " + this.userDetail.controls['year'].value,
+      'notes':this.userDetail.controls['notes'].value,
+      'profilepic':this.userDetail.controls['profilepic'].value,
+      'id': this.id,
+    
+    };
+    console.log(employeeDto.department+" "+employeeDto.notes+" "+employeeDto.salary+" "+employeeDto.startDate);
+    this.employeeService.updateEmployee(employeeDto).subscribe((response: any) => {
+      console.log("response is " + response);
+      this.router.navigate(["/"]);
+
+    })
+  }
+
+
   onSubmit() {
     this.submitted = true;
     this.register();
@@ -126,5 +218,19 @@ export class CreateEmployeeComponent implements OnInit {
   reset(){
     this.userDetail.reset();
   }
+
+  toggleCheckBox(dept){
+    return (this.departments.includes(dept)) ? true : false;
+ }
+
+ reviewButton(){
+   this.isDisabled=true;
+   if(!(this.userDetail.controls['name'].value===null)&&!(this.userDetail.controls['salary'].value===0)&&!(this.userDetail.controls['gender'].value===null)
+   &&!(this.userDetail.controls['day'].value===null)&&!(this.userDetail.controls['month'].value===null)&&!(this.userDetail.controls['year'].value===null)
+   &&!(this.userDetail.controls['notes'].value===null)&&!(this.userDetail.controls['profilepic'].value===null)){
+     this.isDisabled=false;
+   }
+   return this.isDisabled;
+ }
 
 }

@@ -20,5 +20,18 @@ export class UserserviceService {
     return this.http.get('http://localhost:9090/employee-payroll/get');
   }
 
+  getEmployee(id){
+    return this.http.get('http://localhost:9090/employee-payroll/getbyid/?id='+id);
+  }
+
+  updateEmployee(data){
+    return this.http.put('http://localhost:9090/employee-payroll/update/',data);
+
+  }
+
+   deleteEmployee(id){
+    return this.http.delete('http://localhost:9090/employee-payroll/delete/'+id);
+  }
+
 }
 

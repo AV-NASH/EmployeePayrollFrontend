@@ -15,8 +15,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import { EmployeeListComponent } from './employee-component/employee-list/employee-list.component';
+import {MatButtonModule} from '@angular/material/button'; 
+import {EmployeeListComponent} from './employee-component/employee-list/employee-list.component'
 
 
 @NgModule({

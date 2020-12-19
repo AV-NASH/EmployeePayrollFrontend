@@ -1,51 +1,55 @@
 <mat-toolbar>
+  <div style="margin-left: 9.5%;" fxLayout="row" fxLayoutAlign="space-between center" >
+    <div><img src="../assets/logo.png" alt=""></div>
     <div>
         <div class="employeetxt">EMPLOYEE</div>
         <div class="payrolltxt">PAYROLL</div>
     </div>
+  </div>
    </mat-toolbar>
  
    <div  fxLayout="row" fxLayoutAlign="center center" >
    <mat-card>
     <div fxLayout='row' fxLayoutAlign="space-between center" style="color: black;
-    margin-top: 8%;">
-      <div style="font-weight: 800;
-      font-size: 258%;">Employee Details</div>
+    margin-top: 1%;">
+      <div style="font-weight: bold; color: #42515F;  font-size: 22px;">Employee Details</div>
       <div>
-        <button class="register" mat-raised-button color="primary" routerLink="/create-employee">Add Employee</button>
+        <button class="register" mat-raised-button color="primary" style="background-color: #82A70C;" routerLink="/create-employee">Add Employee</button>
       </div>
     </div>
 
     <!-- <div class="panel panel-default"> -->
         <!-- [style.background-color]="changeColorOne() -->
-
+      <div style="margin-top: 3%;">
         <div class="tableWrapper">
-          <div fxLayout="row" fxLayoutAlign="space-between center"  class="containerTitle">
-            <div fxFlex="5" class="oneTitle">Profile</div>
-            <div fxFlex="15" class="oneTitle">Name</div>
-            <div fxFlex="10" class="oneTitle">Salary</div>
-            <div fxFlex="20" class="oneTitle">Department</div>
-            <div fxFlex="10" class="oneTitle">Gender</div>
-            <div fxFlex="10" class="oneTitle">Start Date</div>
-            <div fxFlex="20" class="oneTitle">Notes</div>
-            <div fxFlex="10" class="oneTitle">Actions</div>
+          <div fxLayout="row" fxLayoutAlign="space-between center" style=" background-color: #42515F; padding-top: 1.8%; padding-bottom: 1.8%; padding-left: 1%;" class="containerTitle">
+            <div style="font-weight: normal; color:rgb(236, 235, 235); " fxFlex="5" class="oneTitle">Profile</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235); padding-left: 1.4%;" fxFlex="15" class="oneTitle">Name</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235); padding-left: 2%;" fxFlex="10" class="oneTitle">Salary</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235); padding-left: 1.8%;" fxFlex="20" class="oneTitle">Department</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235); padding-left: 3%;" fxFlex="10" class="oneTitle">Gender</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235);  padding-left: 2.5%;" fxFlex="10" class="oneTitle">Start Date</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235); padding-left: 1%;" fxFlex="20" class="oneTitle">Notes</div>
+            <div style="font-weight: normal; color:rgb(236, 235, 235)" fxFlex="10" class="oneTitle">Actions</div>
           </div>
     
-          <div fxLayout="row" fxLayoutAlign="space-between center"  class="containerListItems" *ngFor="let employee of employees;" >
-            <div fxFlex="5" class="one"><img src="{{employee.profilepic}}" alt=""></div>
-            <div fxFlex="15" class="two">{{employee.name}}</div>
-            <div fxFlex="10" class="two">{{employee.salary}}</div>
-            <div fxFlex="20" class="two">{{employee.department}}</div>
-            <div fxFlex="10" class="two">{{employee.gender}}</div>
-            <div fxFlex="10" class="two">{{employee.startDate}}</div>
-            <div fxFlex="20" class="two">{{employee.notes}}</div>
+          <div style="border: rgb(58, 58, 58); border-style: solid; border-width: 1px; padding-left: 1%; padding-right: 1%;"
+           fxLayout="row" fxLayoutAlign="space-between center"  class="containerListItems" *ngFor="let employee of employees;" >
+            <div  fxFlex="5" class="one"><img src="{{employee.profilepic}}" alt=""></div>
+            <div style="font: normal normal normal 16px/21px Roboto; color: #3D3D3D;" fxFlex="15" class="two">{{employee.name}}</div>
+            <div style="font: normal normal normal 16px/21px Roboto; color: #3D3D3D;" fxFlex="10" class="two">{{employee.salary}}</div>
+            <div style="font: normal normal normal 16px/21px Roboto; color: #3D3D3D;" fxFlex="20" class="two">{{employee.department}}</div>
+            <div style="font: normal normal normal 16px/21px Roboto; color: #3D3D3D;" fxFlex="10" class="two">{{employee.gender}}</div>
+            <div style="font: normal normal normal 16px/21px Roboto; color: #3D3D3D;" fxFlex="10" class="two">{{employee.startDate}}</div>
+            <div  style="font: normal normal normal 16px/21px Roboto; color: #3D3D3D; padding-right: 1%;" fxFlex="20" class="two">{{employee.notes}}</div>
     
     
-            <div fxFlex="10" class="three">
-              <button mat-raised-button [routerLink]="['/create', employee.id]">E</button>
-              <button mat-raised-button (click)="deleteEmployee(employee.id)">X</button>
+            <div style="padding-right: 1%;"  fxLayout="row" fxLayoutAlign="center center" >
+              <button  [routerLink]="['/create-employee', employee.id]"><img src="../assets/icons/create-black-18dp.svg" alt=""></button>
+              <button (click)="deleteEmployee(employee.id)"><img  src="../assets/icons/delete-black-18dp.svg" alt=""></button>
             </div>
           </div>
         </div>
+      </div>
    </mat-card>
    </div>
